@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yan Zhuang - Academic Portfolio</title>
+    <style>
+        /* --- Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+        /* --- Variables --- */
+        :root {
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --color-bg: #f8fafc; /* slate-50 */
+            --color-surface: #ffffff;
+            --color-text-main: #0f172a; /* slate-900 */
+            --color-text-muted: #64748b; /* slate-500 */
+            --color-primary: #0d9488; /* teal-600 */
+            --color-primary-dark: #0f766e; /* teal-700 */
+            --color-primary-light: #ccfbf1; /* teal-100 */
+            --color-border: #e2e8f0; /* slate-200 */
+        }
+
+        /* --- Reset & Base --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            color: var(--color-text-main);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--color-text-main);
+        }
+
+        .logo span {
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .bar {
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text-muted);
+            transition: 0.3s;
+        }
+
+        /* --- Mobile Menu --- */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 80px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            font-weight: 300;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-text-main);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--color-primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40%;
+            height: 4px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
+        }
+
+        /* --- About --- */
+        .about-card {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--color-text-main);
+            font-weight: 600;
+        }
+
+        .highlight-teal {
+            color: var(--color-primary-dark);
+            font-weight: 500;
+        }
+
+        /* --- Research --- */
+        .research-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .research-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #115e59;
+            background-color: #ccfbf1;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+        }
+
+        .research-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-sans);
+        }
+
+        .research-status {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .abstract-toggle {
+            color: var(--color-primary-dark);
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .abstract-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-top: 1px solid transparent;
+            margin-top: 0;
+        }
+
+        .abstract-content.open {
+            max-height: 500px; /* Arbitrary large height */
+            border-top: 1px solid var(--color-border);
+            margin-top: 1rem;
+            padding-top: 1rem;
+        }
+
+        .abstract-text {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        /* --- CV --- */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .cv-section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-family: var(--font-serif);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2.5rem;
+            border-left: 1px solid var(--color-border);
+        }
+
+        .timeline-item:last-child {
+            border-left: 1px solid transparent;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -5px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px white;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+            flex-wrap: wrap;
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text-main);
+        }
+
+        .timeline-year {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .timeline-inst {
+            color: var(--color-primary-dark);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-loc {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* --- Toolkit --- */
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .tool-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--color-primary-light);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-icon {
+            color: #94a3b8;
+            transition: color 0.3s;
+        }
+
+        .tool-card:hover .tool-icon {
+            color: var(--color-primary);
+        }
+
+        .tool-name {
+            font-weight: 500;
+            color: var(--color-text-muted);
+        }
+
+        .tool-card:hover .tool-name {
+            color: var(--color-text-main);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* --- Media Queries --- */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 4.5rem; }
+            .nav-links { display: flex; }
+            .mobile-menu-btn { display: none; }
+            .cv-grid { grid-template-columns: 1fr 1fr; }
+            .toolkit-grid { grid-template-columns: repeat(5, 1fr); }
+            .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .hero { padding-top: 120px; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Y<span>.</span> Zhuang</a>
+            
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#cv" class="nav-link">CV</a>
+                <a href="#skills" class="nav-link">Toolkit</a>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="nav-link" onclick="toggleMenu()">Home</a>
+        <a href="#about" class="nav-link" onclick="toggleMenu()">About</a>
+        <a href="#research" class="nav-link" onclick="toggleMenu()">Research</a>
+        <a href="#cv" class="nav-link" onclick="toggleMenu()">CV</a>
+        <a href="#skills" class="nav-link" onclick="toggleMenu()">Toolkit</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero container">
+        <h1>Yan Zhuang</h1>
+        <p>Incoming Economics PhD Student specializing in Environmental & Energy Economics.</p>
+        
+        <div class="hero-actions">
+            <a href="CV_YanZhuang.pdf" target="_blank" class="btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Download CV
+            </a>
+            
+            <div class="social-links">
+                <a href="yanzhuang2026@outlook.com" class="social-icon" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+                <a href="https://github.com" target="_blank" class="social-icon" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+                <a href="https://scholar.google.com" target="_blank" class="social-icon" aria-label="Google Scholar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <div class="about-card">
+            <h2 class="section-title">About Me</h2>
+            <p class="about-text">
+                I am an incoming Economics PhD student. I earned my undergraduate degree in <span class="highlight">Economics of Resources and Environment</span> from <span class="highlight-teal">Renmin University of China</span>, alongside an exchange at <span class="highlight-teal">UC Davis</span>.
+            </p>
+            <p class="about-text">
+                My research focuses on <span class="highlight">environmental economics, energy economics, and climate change</span>, leveraging quantitative methods, spatial econometrics, and causal inference for robust policy evaluation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="container">
+        <h2 class="section-title">Research</h2>
+
+        <div class="research-card">
+            <span class="tag">Working Paper</span>
+            <h3 class="research-title">Integrating Climate Change Impacts into the Assessment of China’s Onshore Wind Power Potential</h3>
+            <p class="research-status">Under Review</p>
+            
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">
+                Read Abstract 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="abstract-content">
+                <p class="abstract-text">China is highly exposed to climate change impacts, while onshore wind power is expected to play a central role in achieving its 2060 carbon neutrality target. Assessing the impacts of climate change on wind energy potential is critical for sustainable energy planning. This study develops an integrated framework to evaluate China’s onshore wind potential by incorporating wind speed, temperature, and precipitation into geographical, technical, and economic assessments under GCM–SSP projections. High-resolution, multi-model results reveal that approximately one-third of China’s land area remains suitable for onshore wind development, with national geographic variations generally within ±6% across scenarios. Annual technical potential (10,500–14,200 TWh) exhibits modest fluctuations rather than persistent decline, with mid-century changes typically within 2% of current levels, indicating overall resilience of the aggregate resource base. However, regional disparities intensify: northwestern provinces retain dominant generation capacity and lower climate-related economic penalties, whereas humid southern regions face rising precipitation-induced turbine degradation. Levelized cost of electricity increases by 9%, 11%, and nearly 20% under SSP1-2.6, SSP2-4.5, and SSP5-8.5, respectively, potentially offsetting localized technical gains. These findings suggest that while China’s aggregate wind resource remains structurally stable under climate change, regional economic competitiveness and climate uncertainties necessitate differentiated deployment strategies and climate- informed energy planning.</p>
+            </div>
+        </div>
+
+        <div class="research-card">
+            <span class="tag">Work in Progress</span>
+            <h3 class="research-title">Sand Out, Water In: The (Un)intended Consequences of Afforestation on Hydrological Cycle and Agricultural Outcomes in China</h3>
+            <p class="research-status">Work in Progress (Undergraduate Thesis)</p>
+            
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">
+                Read Abstract 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="abstract-content">
+                <p class="abstract-text">Large-scale afforestation in arid regions is widely debated, yet its spatial externalities, particularly those transmitted through atmospheric processes, remain poorly understood. This paper studies the spatial externalities of afforestation on agricultural productivity through atmospheric moisture spillovers. Using quasi-random variation in prevailing wind direction, we construct upwind forest exposure measures that capture the upstream air masses reaching each location in China. We establish a positive relationship between forest exposure and annual precipitation. This effect, however, does not extend to the growing season, consistent with a redistribution of atmospheric moisture rather than a uniform increase in rainfall. Nevertheless, crop yields increase significantly in downwind areas, even conditional on local precipitation and weather controls. Crop phenology shows that yield gains are concentrated in growth stages most sensitive to moisture stress, indicating non-precipitation moisture channels. By identifying mechanism-specific atmospheric elasticities, the paper highlights a spatial decoupling between forest location and agricultural benefits and underscores the importance of accounting for cross-regional externalities in the evaluation of land-use and climate policies. </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" class="container">
+        <div class="cv-grid">
+            <!-- Education -->
+            <div>
+                <h3 class="cv-section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+                    Education
+                </h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Ph.D. in Economics</span>
+                        <span class="timeline-year">Incoming</span>
+                    </div>
+                    <div class="timeline-inst">XXX University</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">B.Econ. Economics of Resources and Environment</span>
+                        <span class="timeline-year">2022 - 2026</span>
+                    </div>
+                    <div class="timeline-inst">Renmin University of China</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Exchange Student</span>
+                        <span class="timeline-year">2025</span>
+                    </div>
+                    <div class="timeline-inst">University of California, Davis</div>
+                    <div class="timeline-loc">Global Study Program</div>
+                </div>
+            </div>
+
+            <!-- Awards -->
+            <div>
+                <h3 class="cv-section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    Honors & Awards
+                </h3>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Honorable Mention</span>
+                        <span class="timeline-year">2024</span>
+                    </div>
+                    <div class="timeline-inst">Tsinghua International SDGs Case Analysis Competition</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Academic Perfection</span>
+                        <span class="timeline-year">2025</span>
+                    </div>
+                    <div class="timeline-inst">University of California, Davis</div>
+                    <div class="timeline-loc">Awarded during Global Study Program</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Academic Excellence Scholarship</span>
+                        <span class="timeline-year">2023 & 2025</span>
+                    </div>
+                    <div class="timeline-inst">Renmin University of China</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toolkit Section -->
+    <section id="skills" class="container">
+        <h2 class="section-title">Technical Toolkit</h2>
+        <div class="toolkit-grid">
+            <div class="tool-card">
+                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span class="tool-name">Python</span>
+            </div>
+            <div class="tool-card">
+                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                <span class="tool-name">R</span>
+            </div>
+            <div class="tool-card">
+                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                <span class="tool-name">Stata</span>
+            </div>
+            <div class="tool-card">
+                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="tool-name">ArcGIS Pro</span>
+            </div>
+            <div class="tool-card">
+                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                <span class="tool-name">LaTeX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p style="font-family: var(--font-serif); font-size: 1.125rem; color: #e2e8f0; margin-bottom: 0.5rem;">Yan Zhuang</p>
+                <p style="font-size: 0.875rem;">&copy; 2025 All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Email</a>
+                <a href="#">GitHub</a>
+                <a href="#">Scholar</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Abstract Toggle
+        function toggleAbstract(button) {
+            const content = button.nextElementSibling;
+            content.classList.toggle('open');
+            
+            // Update button text
+            if (content.classList.contains('open')) {
+                button.innerHTML = 'Hide Abstract <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>';
+            } else {
+                button.innerHTML = 'Read Abstract <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+            }
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
