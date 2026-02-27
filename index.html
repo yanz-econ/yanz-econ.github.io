@@ -177,8 +177,36 @@
             padding-bottom: 80px;
             min-height: 80vh;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-inner {
+            display: flex;
+            flex-direction: column-reverse; /* On mobile, the image appears above the text */
+            align-items: center;
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
             justify-content: center;
+            width: 100%;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border-radius: 1.5rem; /* Soft rounded corners to match the 'About' card */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--color-border);
+            object-fit: cover;
         }
 
         .hero h1 {
@@ -513,6 +541,9 @@
             .cv-grid { grid-template-columns: 1fr 1fr; }
             .toolkit-grid { grid-template-columns: repeat(5, 1fr); }
             .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
+	    .hero-inner { flex-direction: row; justify-content: space-between; }
+            .hero-text { padding-right: 2rem; }
+            .hero-image { justify-content: flex-end; }
         }
 
         @media (max-width: 767px) {
@@ -557,25 +588,35 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero container">
-        <h1>Yan Zhuang</h1>
-        <p>Incoming Economics PhD Student specializing in Environmental Economics.</p>
-        
-        <div class="hero-actions">
-            <a href="CV_YanZhuang.pdf" target="_blank" class="btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                Download CV
-            </a>
-            
-            <div class="social-links">
-                <a href="mailto:yanzhuang2026@outlook.com" class="social-icon" aria-label="Email">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                </a>
-                <a href="https://github.com/yanz-econ" target="_blank" class="social-icon" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                </a>
-                <a href="https://scholar.google.com" target="_blank" class="social-icon" aria-label="Google Scholar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                </a>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>Yan Zhuang</h1>
+                <p>Incoming Economics PhD Student specializing in Environmental & Energy Economics.</p>
+                
+                <div class="hero-actions">
+                    <a href="CV_YanZhuang.pdf" target="_blank" class="btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        Download CV
+                    </a>
+                    
+                    <div class="social-links">
+                        <a href="mailto:yanzhuang2026@outlook.com" class="social-icon" aria-label="Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+
+			<a href="https://github.com/yanz-econ" target="_blank" class="social-icon" aria-label="Github">
+			    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        </a>
+                        
+                        <a href="https://scholar.google.com" target="_blank" class="social-icon" aria-label="Google Scholar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="profile.jpg" alt="Yan Zhuang" class="profile-img">
             </div>
         </div>
     </section>
@@ -585,7 +626,7 @@
         <div class="about-card">
             <h2 class="section-title">About Me</h2>
             <p class="about-text">
-                I am an incoming Economics PhD student. I earned my undergraduate degree in <span class="highlight">Economics of Resources and Environment</span> from <span class="highlight-teal">Renmin University of China</span>, alongside an exchange at <span class="highlight-teal">UC Davis</span>.
+                I am an incoming Economics PhD student. I earned my undergraduate degree in <span class="highlight">Economics of Resources and Environment</span> from <span class="highlight-teal"><a href="https://see.ruc.edu.cn/en/" target="_blank";">Renmin University of China</a></span>, alongside an exchange at <span class="highlight-teal"><a href="https://are.ucdavis.edu/" target="_blank";">UC Davis</a></span>.
             </p>
             <p class="about-text">
                 My research focuses on <span class="highlight">environmental economics, energy economics, and climate change</span>, leveraging quantitative methods, spatial econometrics, and causal inference for robust policy evaluation.
@@ -607,7 +648,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div class="abstract-content">
-                <p class="abstract-text">China is highly exposed to climate change impacts, while onshore wind power is expected to play a central role in achieving its 2060 carbon neutrality target. Assessing the impacts of climate change on wind energy potential is critical for sustainable energy planning. This study develops an integrated framework to evaluate China’s onshore wind potential by incorporating wind speed, temperature, and precipitation into geographical, technical, and economic assessments under GCM–SSP projections. High-resolution, multi-model results reveal that approximately one-third of China’s land area remains suitable for onshore wind development, with national geographic variations generally within ±6% across scenarios. Annual technical potential (10,500–14,200 TWh) exhibits modest fluctuations rather than persistent decline, with mid-century changes typically within 2% of current levels, indicating overall resilience of the aggregate resource base. However, regional disparities intensify: northwestern provinces retain dominant generation capacity and lower climate-related economic penalties, whereas humid southern regions face rising precipitation-induced turbine degradation. Levelized cost of electricity increases by 9%, 11%, and nearly 20% under SSP1-2.6, SSP2-4.5, and SSP5-8.5, respectively, potentially offsetting localized technical gains. These findings suggest that while China’s aggregate wind resource remains structurally stable under climate change, regional economic competitiveness and climate uncertainties necessitate differentiated deployment strategies and climate-informed energy planning.</p>
+                <p class="abstract-text">China is highly exposed to climate change impacts, while onshore wind power is expected to play a central role in achieving its 2060 carbon neutrality target. Assessing the impacts of climate change on wind energy potential is critical for sustainable energy planning. This study develops an integrated framework to evaluate China’s onshore wind potential by incorporating wind speed, temperature, and precipitation into geographical, technical, and economic assessments under GCM–SSP projections. High-resolution, multi-model results reveal that approximately one-third of China’s land area remains suitable for onshore wind development, with national geographic variations generally within ±6% across scenarios. Annual technical potential (10,500–14,200 TWh) exhibits modest fluctuations rather than persistent decline, with mid-century changes typically within 2% of current levels, indicating overall resilience of the aggregate resource base. However, regional disparities intensify: northwestern provinces retain dominant generation capacity and lower climate-related economic penalties, whereas humid southern regions face rising precipitation-induced turbine degradation. Levelized cost of electricity increases by 9%, 11%, and nearly 20% under SSP1-2.6, SSP2-4.5, and SSP5-8.5, respectively, potentially offsetting localized technical gains. These findings suggest that while China’s aggregate wind resource remains structurally stable under climate change, regional economic competitiveness and climate uncertainties necessitate differentiated deployment strategies and climate- informed energy planning.</p>
             </div>
         </div>
 
@@ -651,7 +692,9 @@
                         <span class="timeline-title">B.Econ. Economics of Resources and Environment</span>
                         <span class="timeline-year">2022 - 2026</span>
                     </div>
-                    <div class="timeline-inst">Renmin University of China</div>
+                    <div class="timeline-inst">
+			<a href="https://see.ruc.edu.cn/en/" target="_blank";">Renmin University of China</a>
+			</div>
                 </div>
 
                 <div class="timeline-item">
@@ -661,7 +704,9 @@
                         <span class="timeline-year">2025</span>
                     </div>
                     <div class="timeline-inst">University of California, Davis</div>
-                    <div class="timeline-loc">Global Study Program</div>
+                    <div class="timeline-loc">
+			<a href="https://globalstudy.ucdavis.edu/" target="_blank";">Global Study Program</a>
+		    </div>
                 </div>
             </div>
 
@@ -675,20 +720,22 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-header">
-                        <span class="timeline-title">Honorable Mention</span>
-                        <span class="timeline-year">2024</span>
-                    </div>
-                    <div class="timeline-inst">Tsinghua International SDGs Case Analysis Competition</div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
                         <span class="timeline-title">Academic Perfection</span>
                         <span class="timeline-year">2025</span>
                     </div>
                     <div class="timeline-inst">University of California, Davis</div>
-                    <div class="timeline-loc">Awarded during Global Study Program</div>
+                    <div class="timeline-loc">Awarded during <a href="https://globalstudy.ucdavis.edu/" target="_blank";">Global Study Program</a></div>
+                </div>
+
+		<div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Honorable Mention</span>
+                        <span class="timeline-year">2024</span>
+                    </div>
+                    <div class="timeline-inst">
+			<a href="https://www.sppm.tsinghua.edu.cn/english/info/1057/1751.htm" target="_blank";">Tsinghua International Case Analysis Competition of Public Policy on SDGs</a>
+		    </div>
                 </div>
 
                 <div class="timeline-item">
