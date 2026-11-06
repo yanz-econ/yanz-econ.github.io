@@ -1,825 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yan Zhuang - Academic Portfolio</title>
-    <style>
-        /* --- Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inconsolata:wght@400;500&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
-
-        /* --- Variables --- */
-        :root {
-            --font-sans: 'Open Sans', system-ui, -apple-system, sans-serif;
-            --font-serif: 'Crimson Pro', Georgia, serif;
-            --font-mono: 'Inconsolata, monospace;
-
-            --color-bg: #f8fafc; /* slate-50 */
-            --color-surface: #ffffff;
-            --color-text-main: #0f172a; /* slate-900 */
-            --color-text-muted: #64748b; /* slate-500 */
-            --color-primary: #947EC2; /* violet */
-            --color-primary-dark: #725BA6; /* violet-dark */
-            --color-primary-light: #EDE3FF; /* violet-light */
-            --color-border: #e2e8f0; /* slate-200 */
-        }
-
-        /* --- Reset & Base --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--color-bg);
-            color: var(--color-text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.2s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-family: inherit;
-        }
-
-        /* --- Typography --- */
-        h1, h2, h3, h4 {
-            font-family: var(--font-serif);
-            color: var(--color-text-main);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
-        /* --- Navigation --- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
-            z-index: 1000;
-            height: 70px;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo {
-            font-family: var(--font-serif);
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--color-text-main);
-        }
-
-        .logo span {
-            color: var(--color-primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--color-text-muted);
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--color-primary-dark);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--color-primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            padding: 5px;
-        }
-
-        .bar {
-            width: 24px;
-            height: 2px;
-            background-color: var(--color-text-muted);
-            transition: 0.3s;
-        }
-
-        /* --- Mobile Menu --- */
-        .mobile-menu {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: white;
-            border-bottom: 1px solid var(--color-border);
-            padding: 1rem;
-            display: none;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 999;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-menu.active {
-            display: flex;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            padding-top: 160px;
-            padding-bottom: 80px;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-inner {
-            display: flex;
-            flex-direction: column-reverse; /* On mobile, the image appears above the text */
-            align-items: center;
-            gap: 3rem;
-            width: 100%;
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .profile-img {
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            border-radius: 1.5rem; /* Soft rounded corners to match the 'About' card */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--color-border);
-            object-fit: cover;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--color-text-muted);
-            font-weight: 300;
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .btn-primary {
-            background-color: var(--color-text-main);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--color-primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.2);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icon {
-            width: 44px;
-            height: 44px;
-            background-color: #f1f5f9;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-text-muted);
-            transition: all 0.3s;
-        }
-
-        .social-icon:hover {
-            background-color: var(--color-primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- Sections --- */
-        section {
-            padding: 3rem 0;
-        }
-
-        .section-title {
-            font-size: 2.25rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40%;
-            height: 4px;
-            background-color: var(--color-primary);
-            border-radius: 2px;
-        }
-
-        /* --- About --- */
-        .about-card {
-            background: var(--color-surface);
-            padding: 2.5rem;
-            border-radius: 2rem;
-            border: 1px solid var(--color-border);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        }
-
-        .about-text {
-            font-size: 1.125rem;
-            color: var(--color-text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .highlight {
-            color: var(--color-text-main);
-            font-weight: 600;
-        }
-
-        .highlight-teal {
-            color: var(--color-primary-dark);
-            font-weight: 500;
-        }
-
-        /* --- Research --- */
-        .research-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            transition: box-shadow 0.3s;
-        }
-
-        .research-card:hover {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-primary-dark);
-            background-color: var(--color-primary-light);
-            border-radius: 9999px;
-            margin-bottom: 1rem;
-        }
-
-        .research-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-family: var(--font-sans);
-        }
-
-        .research-status {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .abstract-toggle {
-            color: var(--color-primary-dark);
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .abstract-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border-top: 1px solid transparent;
-            margin-top: 0;
-        }
-
-        .abstract-content.open {
-            max-height: 500px; /* Arbitrary large height */
-            border-top: 1px solid var(--color-border);
-            margin-top: 1rem;
-            padding-top: 1rem;
-        }
-
-        .abstract-text {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-        }
-
-        /* --- CV --- */
-        .cv-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
-
-        .cv-section-title {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            font-family: var(--font-serif);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            padding-bottom: 2.5rem;
-            border-left: 1px solid var(--color-border);
-        }
-
-        .timeline-item:last-child {
-            border-left: 1px solid transparent;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -5px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            background-color: var(--color-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px white;
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.25rem;
-            flex-wrap: wrap;
-        }
-
-        .timeline-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--color-text-main);
-        }
-
-        .timeline-year {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-        }
-
-        .timeline-inst {
-            color: var(--color-primary-dark);
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-loc {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        /* --- Toolkit --- */
-        .toolkit-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .tool-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            transition: all 0.3s;
-        }
-
-        .tool-card:hover {
-            border-color: var(--color-primary-light);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .tool-icon {
-            color: #94a3b8;
-            transition: color 0.3s;
-        }
-
-        .tool-card:hover .tool-icon {
-            color: var(--color-primary);
-        }
-
-        .tool-name {
-            font-weight: 500;
-            color: var(--color-text-muted);
-        }
-
-        .tool-card:hover .tool-name {
-            color: var(--color-text-main);
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: #0f172a;
-            color: #94a3b8;
-            padding: 3rem 0;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* --- Media Queries --- */
-        @media (min-width: 768px) {
-            .hero h1 { font-size: 4.5rem; }
-            .nav-links { display: flex; }
-            .mobile-menu-btn { display: none; }
-            .cv-grid { grid-template-columns: 1fr 1fr; }
-            .toolkit-grid { grid-template-columns: repeat(5, 1fr); }
-            .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
-	    .hero-inner { flex-direction: row; justify-content: space-between; }
-            .hero-text { padding-right: 2rem; }
-            .hero-image { justify-content: flex-end; }
-        }
-
-        @media (max-width: 767px) {
-            .nav-links { display: none; }
-            .mobile-menu-btn { display: flex; }
-            .hero { padding-top: 120px; }
-            .section-title { font-size: 2rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yan Zhuang | Economics Ph.D. Student, Rutgers University</title>
+<meta name="description" content="Yan Zhuang is a first-year Ph.D. student in Economics at Rutgers University, working on environmental, energy, and climate economics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FDFBF9;--soft:#E6EDE1;--ac:#4C6A47;--ac2:#7A2E56;--ink:#34202C;--mu:#6A5C65;--line:#ECE6E1;
+--serif:'Crimson Pro',Georgia,'Times New Roman',serif;--sans:'Open Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font:400 1rem/1.7 var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:var(--ac);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+a:hover{border-bottom-color:var(--ac)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:2px}
+.wrap{max-width:880px;margin:0 auto;padding:0 1.5rem}
+
+nav{position:sticky;top:0;z-index:10;background:rgba(253,251,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.25rem 1.5rem;padding-top:.75rem;padding-bottom:.75rem}
+.logo{font:600 1.25rem var(--serif);color:var(--ink)}
+.logo:hover{border-color:transparent}
+nav ul{display:flex;gap:1.5rem;list-style:none;font-size:.875rem}
+nav ul a{color:var(--mu)}
+nav ul a:hover{color:var(--ac);border-color:transparent}
+
+.hero{display:grid;grid-template-columns:1fr 270px;gap:4rem;align-items:center;padding:4.5rem 0 4rem}
+h1{font:600 clamp(2.75rem,7vw,4.25rem)/1.02 var(--serif);letter-spacing:-.01em;margin-bottom:1rem}
+.role{font:400 1.375rem/1.45 var(--serif);color:var(--mu);max-width:30rem;margin-bottom:2rem}
+.role a{color:var(--ink);border-bottom-color:var(--ac2)}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;font-size:.9375rem}
+.actions a:not(.btn){color:var(--ac2)}
+.actions a:not(.btn):hover{border-bottom-color:var(--ac2)}
+.btn{background:var(--ac2);color:var(--bg);padding:.6rem 1.35rem;border-radius:999px;font-weight:500;border:1px solid var(--ac2);transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--ac2);border-color:var(--ac2)}
+.photo{justify-self:end;width:100%}
+.photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border-radius:8px}
+
+section{padding:2.75rem 0;border-top:1px solid var(--line)}
+h2{font:600 1.875rem/1.2 var(--serif);margin-bottom:1.75rem}
+h2::after{content:"";display:block;width:2.5rem;height:3px;margin-top:.6rem;background:var(--ac2);border-radius:2px}
+.prose{max-width:40rem;font-size:1.0625rem;color:var(--mu)}
+.prose p+p{margin-top:1rem}
+.prose strong{color:var(--ink);font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;list-style:none}
+.tags li{background:var(--soft);color:var(--ink);font-size:.875rem;padding:.25rem .85rem;border-radius:999px}
+
+.paper+.paper{margin-top:2.25rem}
+.paper h3{font:600 1.375rem/1.3 var(--serif)}
+.meta{font-size:.875rem;color:var(--mu);margin:.25rem 0 .6rem}
+.paper>p:not(.meta){max-width:40rem;font-size:.9375rem;color:var(--mu)}
+details{margin-top:.6rem}
+summary{cursor:pointer;list-style:none;display:inline-block;color:var(--ac);font-size:.875rem;font-weight:500}
+summary::-webkit-details-marker{display:none}
+summary::after{content:" +"}
+details[open] summary::after{content:" \2013"}
+details p{margin-top:.75rem;max-width:40rem;font-size:.9375rem;color:var(--mu);padding-left:1rem;border-left:2px solid var(--ac2)}
+
+.row{display:grid;grid-template-columns:9.5rem 1fr;gap:.25rem 2rem;padding:.85rem 0}
+.row+.row{border-top:1px solid var(--line)}
+.when{font-size:.875rem;color:var(--mu);font-variant-numeric:tabular-nums;padding-top:.15rem}
+.row h3{font:600 1.1875rem/1.35 var(--serif)}
+.row p{font-size:.9375rem;color:var(--mu)}
+.cv-group+.cv-group{margin-top:2.5rem}
+h4{font:400 1.125rem var(--serif);font-style:italic;color:var(--ac2);margin-bottom:.25rem}
+.tools{font-size:1.0625rem;color:var(--mu)}
+
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;margin-top:1.5rem;font-size:.875rem;color:var(--mu)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem 2rem}
+footer span{font-family:var(--serif);font-size:1.0625rem;color:var(--ink)}
+
+@media (max-width:700px){
+.hero{grid-template-columns:1fr;gap:2.5rem;padding:2.5rem 0 3rem}
+.photo{order:-1;max-width:230px;justify-self:start}
+.row{grid-template-columns:1fr}
+.row .when{padding:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo">Y<span>.</span> Zhuang</a>
-            
-            <div class="nav-links">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#research" class="nav-link">Research</a>
-                <a href="#cv" class="nav-link">CV</a>
-                <a href="#skills" class="nav-link">Toolkit</a>
-            </div>
+<nav>
+<div class="wrap">
+<a href="#top" class="logo">Yan Zhuang</a>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#research">Research</a></li>
+<li><a href="#cv">CV</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+</nav>
 
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </button>
-        </div>
-    </nav>
+<main class="wrap" id="top">
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" class="nav-link" onclick="toggleMenu()">Home</a>
-        <a href="#about" class="nav-link" onclick="toggleMenu()">About</a>
-        <a href="#research" class="nav-link" onclick="toggleMenu()">Research</a>
-        <a href="#cv" class="nav-link" onclick="toggleMenu()">CV</a>
-        <a href="#skills" class="nav-link" onclick="toggleMenu()">Toolkit</a>
-    </div>
+<header class="hero">
+<div>
+<h1>Yan Zhuang</h1>
+<p class="role">Ph.D. student in Economics at <a href="https://economics.rutgers.edu/" target="_blank" rel="noopener">Rutgers University</a>, studying environmental, energy, and climate economics.</p>
+<div class="actions">
+<a class="btn" href="CV_YanZhuang.pdf" target="_blank" rel="noopener">Download CV</a>
+<a href="mailto:yz2274@economics.rutgers.edu">Email</a>
+<a href="https://economics.rutgers.edu/people/faculty/people/192-graduate-student-directory/279-graduate-student-directory-2026/1267-zhuang-yan" target="_blank" rel="noopener">Department page</a>
+<a href="https://github.com/yanz-econ" target="_blank" rel="noopener">GitHub</a>
+</div>
+</div>
+<div class="photo"><img src="profile.jpg" alt="Portrait of Yan Zhuang"></div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero container">
-        <div class="hero-inner">
-            <div class="hero-text">
-                <h1>Yan Zhuang</h1>
-                <p>Incoming Economics PhD Student specializing in Environmental & Energy Economics.</p>
-                
-                <div class="hero-actions">
-                    <a href="CV_YanZhuang.pdf" target="_blank" class="btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                        Download CV
-                    </a>
-                    
-                    <div class="social-links">
-                        <a href="mailto:yanzhuang2026@outlook.com" class="social-icon" aria-label="Email">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </a>
+<section id="about">
+<h2>About</h2>
+<div class="prose">
+<p>I am a first-year Ph.D. student in the Department of Economics at <a href="https://economics.rutgers.edu/" target="_blank" rel="noopener">Rutgers University</a>, New Brunswick. I hold a B.Econ. in <strong>Economics of Resources and Environment</strong> from <a href="https://see.ruc.edu.cn/en/" target="_blank" rel="noopener">Renmin University of China</a> and spent a term as an exchange student at <a href="https://globalstudy.ucdavis.edu/" target="_blank" rel="noopener">UC Davis</a>.</p>
+<p>My research asks how climate and land-use change reshape energy systems and agricultural outcomes, and what that means for policy. I rely on applied econometrics, spatial data, and causal inference.</p>
+</div>
+<ul class="tags">
+<li>Environmental economics</li>
+<li>Energy economics</li>
+<li>Climate change</li>
+<li>Applied econometrics</li>
+<li>Causal inference</li>
+</ul>
+</section>
 
-			<a href="https://github.com/yanz-econ" target="_blank" class="social-icon" aria-label="Github">
-			    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                        </a>
-                        
-                        <a href="https://scholar.google.com" target="_blank" class="social-icon" aria-label="Google Scholar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+<section id="research">
+<h2>Research</h2>
 
-            <div class="hero-image">
-                <img src="profile.jpg" alt="Yan Zhuang" class="profile-img">
-            </div>
-        </div>
-    </section>
+<article class="paper">
+<h3>Integrating Climate Change Impacts into the Assessment of China’s Onshore Wind Power Potential</h3>
+<p class="meta">With Dr. Yanhua Wang. Under review at <em>Environmental Impact Assessment Review</em>.</p>
+<details>
+<summary>Abstract</summary>
+<p>China is highly exposed to climate change impacts, while onshore wind power is expected to play a central role in achieving its 2060 carbon neutrality target. Assessing the impacts of climate change on wind energy potential is critical for sustainable energy planning. This study develops an integrated framework to evaluate China’s onshore wind potential by incorporating wind speed, temperature, and precipitation into geographical, technical, and economic assessments under GCM–SSP projections. High-resolution, multi-model results reveal that approximately one-third of China’s land area remains suitable for onshore wind development, with national geographic variations generally within ±6% across scenarios. Annual technical potential (10,500–14,200 TWh) exhibits modest fluctuations rather than persistent decline, with mid-century changes typically within 2% of current levels, indicating overall resilience of the aggregate resource base. However, regional disparities intensify: northwestern provinces retain dominant generation capacity and lower climate-related economic penalties, whereas humid southern regions face rising precipitation-induced turbine degradation. Levelized cost of electricity increases by 9%, 11%, and nearly 20% under SSP1-2.6, SSP2-4.5, and SSP5-8.5, respectively, potentially offsetting localized technical gains. These findings suggest that while China’s aggregate wind resource remains structurally stable under climate change, regional economic competitiveness and climate uncertainties necessitate differentiated deployment strategies and climate-informed energy planning.</p>
+</details>
+</article>
 
-    <!-- About Section -->
-    <section id="about" class="container">
-        <div class="about-card">
-            <h2 class="section-title">About Me</h2>
-            <p class="about-text">
-                I am an incoming Economics PhD student at <span class="highlight-teal"><a href="https://economics.rutgers.edu/" target="_blank";">Rutgers University</a></span>. I earned my undergraduate degree in <span class="highlight">Economics of Resources and Environment</span> from <span class="highlight-teal"><a href="https://see.ruc.edu.cn/en/" target="_blank";">Renmin University of China</a></span>, alongside an exchange at <span class="highlight-teal"><a href="https://are.ucdavis.edu/" target="_blank";">UC Davis</a></span>.
-            </p>
-            <p class="about-text">
-                My research focuses on <span class="highlight">environmental economics, energy economics, and climate change</span>, leveraging quantitative methods, spatial econometrics, and causal inference for robust policy evaluation.
-            </p>
-        </div>
-    </section>
+<article class="paper">
+<h3>Sand Out, Water In: The (Un)intended Consequences of Afforestation on the Hydrological Cycle and Agricultural Outcomes</h3>
+<p class="meta">Work in progress, based on my undergraduate thesis.</p>
+<details>
+<summary>Abstract</summary>
+<p>Large-scale afforestation in arid regions is widely debated, yet its spatial externalities, particularly those transmitted through atmospheric processes, remain poorly understood. This paper studies the spatial externalities of afforestation on agricultural productivity through atmospheric moisture spillovers. Using quasi-random variation in prevailing wind direction, we construct upwind forest exposure measures that capture the upstream air masses reaching each location in China. We establish a positive relationship between forest exposure and annual precipitation. This effect, however, does not extend to the growing season, consistent with a redistribution of atmospheric moisture rather than a uniform increase in rainfall. Nevertheless, crop yields increase significantly in downwind areas, even conditional on local precipitation and weather controls. Crop phenology shows that yield gains are concentrated in growth stages most sensitive to moisture stress, indicating non-precipitation moisture channels. By identifying mechanism-specific atmospheric elasticities, the paper highlights a spatial decoupling between forest location and agricultural benefits and underscores the importance of accounting for cross-regional externalities in the evaluation of land-use and climate policies.</p>
+</details>
+</article>
 
-    <!-- Research Section -->
-    <section id="research" class="container">
-        <h2 class="section-title">Research</h2>
+<article class="paper">
+<h3>Agent-Based Policy Simulation of Express Packaging Waste Management</h3>
+<p class="meta">Project leader, Renmin University of China, 2024–2025. Awarded “Excellent Completion.”</p>
+<p>Survey data from 1,600 consumers, merchants, and couriers parameterize an agent-based model of “Reduce, Replace, Recycle” policies. Non-monetary incentives outperform traditional subsidies in encouraging merchants to cut packaging.</p>
+</article>
+</section>
 
-        <div class="research-card">
-            <span class="tag">Working Paper</span>
-            <h3 class="research-title">Integrating Climate Change Impacts into the Assessment of China’s Onshore Wind Power Potential</h3>
-            <p class="research-status">Under Review</p>
-            
-            <button class="abstract-toggle" onclick="toggleAbstract(this)">
-                Read Abstract 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="abstract-content">
-                <p class="abstract-text">China is highly exposed to climate change impacts, while onshore wind power is expected to play a central role in achieving its 2060 carbon neutrality target. Assessing the impacts of climate change on wind energy potential is critical for sustainable energy planning. This study develops an integrated framework to evaluate China’s onshore wind potential by incorporating wind speed, temperature, and precipitation into geographical, technical, and economic assessments under GCM–SSP projections. High-resolution, multi-model results reveal that approximately one-third of China’s land area remains suitable for onshore wind development, with national geographic variations generally within ±6% across scenarios. Annual technical potential (10,500–14,200 TWh) exhibits modest fluctuations rather than persistent decline, with mid-century changes typically within 2% of current levels, indicating overall resilience of the aggregate resource base. However, regional disparities intensify: northwestern provinces retain dominant generation capacity and lower climate-related economic penalties, whereas humid southern regions face rising precipitation-induced turbine degradation. Levelized cost of electricity increases by 9%, 11%, and nearly 20% under SSP1-2.6, SSP2-4.5, and SSP5-8.5, respectively, potentially offsetting localized technical gains. These findings suggest that while China’s aggregate wind resource remains structurally stable under climate change, regional economic competitiveness and climate uncertainties necessitate differentiated deployment strategies and climate- informed energy planning.</p>
-            </div>
-        </div>
+<section id="cv">
+<h2>Curriculum vitae</h2>
 
-        <div class="research-card">
-            <span class="tag">Work in Progress</span>
-            <h3 class="research-title">The (Un)intended Consequences of Afforestation on Hydrological Cycle and Agricultural Outcomes in China</h3>
-            <p class="research-status">Work in Progress (Undergraduate Thesis)</p>
-            
-            <button class="abstract-toggle" onclick="toggleAbstract(this)">
-                Read Abstract 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="abstract-content">
-                <p class="abstract-text">Large-scale afforestation in arid regions is widely debated, yet its spatial externalities, particularly those transmitted through atmospheric processes, remain poorly understood. This paper studies the spatial externalities of afforestation on agricultural productivity through atmospheric moisture spillovers. Using quasi-random variation in prevailing wind direction, we construct upwind forest exposure measures that capture the upstream air masses reaching each location in China. We establish a positive relationship between forest exposure and annual precipitation. This effect, however, does not extend to the growing season, consistent with a redistribution of atmospheric moisture rather than a uniform increase in rainfall. Nevertheless, crop yields increase significantly in downwind areas, even conditional on local precipitation and weather controls. Crop phenology shows that yield gains are concentrated in growth stages most sensitive to moisture stress, indicating non-precipitation moisture channels. By identifying mechanism-specific atmospheric elasticities, the paper highlights a spatial decoupling between forest location and agricultural benefits and underscores the importance of accounting for cross-regional externalities in the evaluation of land-use and climate policies. </p>
-            </div>
-        </div>
-    </section>
+<div class="cv-group">
+<h4>Education</h4>
+<div class="row"><div class="when">2026 to present</div><div><h3>Ph.D. in Economics</h3><p><a href="https://economics.rutgers.edu/" target="_blank" rel="noopener">Rutgers University</a>, New Brunswick</p></div></div>
+<div class="row"><div class="when">2022 to 2026</div><div><h3>B.Econ., Economics of Resources and Environment</h3><p><a href="https://see.ruc.edu.cn/en/" target="_blank" rel="noopener">Renmin University of China</a></p></div></div>
+<div class="row"><div class="when">Jan to Mar 2025</div><div><h3>Exchange student</h3><p>University of California, Davis, <a href="https://globalstudy.ucdavis.edu/" target="_blank" rel="noopener">Global Study Program</a></p></div></div>
+</div>
 
-    <!-- CV Section -->
-    <section id="cv" class="container">
-        <div class="cv-grid">
-            <!-- Education -->
-            <div>
-                <h3 class="cv-section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-                    Education
-                </h3>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Ph.D. in Economics</span>
-                        <span class="timeline-year">Fall 2026</span>
-                    </div>
-                    <div class="timeline-inst">
-						<a href="https://economics.rutgers.edu/" target="_blank";">Rutgers University</a>
-					</div>
-                </div>
+<div class="cv-group">
+<h4>Teaching and experience</h4>
+<div class="row"><div class="when">Fall 2025</div><div><h3>Teaching assistant, Carbon Market Theory and Practice</h3><p>Renmin University of China</p></div></div>
+<div class="row"><div class="when">Aug to Nov 2024</div><div><h3>Intern</h3><p>Beijing Greenovation Institute for Public Welfare Development. Covered the UN Biodiversity Conference (COP16), compared national park systems in China and the U.S., and contributed to a published policy report on China–ASEAN agricultural cooperation.</p></div></div>
+</div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">B.Econ. Economics of Resources and Environment</span>
-                        <span class="timeline-year">2022 -- 2026</span>
-                    </div>
-                    <div class="timeline-inst">
-						<a href="https://see.ruc.edu.cn/en/" target="_blank";">Renmin University of China</a>
-					</div>
-                </div>
+<div class="cv-group">
+<h4>Honors</h4>
+<div class="row"><div class="when">2025</div><div><h3>Academic Perfection</h3><p>UC Davis, awarded during the Global Study Program</p></div></div>
+<div class="row"><div class="when">2024</div><div><h3>Honorable Mention, group leader</h3><p><a href="https://www.sppm.tsinghua.edu.cn/english/info/1057/1751.htm" target="_blank" rel="noopener">Tsinghua International SDGs Case Analysis Competition</a></p></div></div>
+<div class="row"><div class="when">2023 and 2025</div><div><h3>Academic Excellence Scholarship</h3><p>Renmin University of China</p></div></div>
+</div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Exchange Student</span>
-                        <span class="timeline-year">2025</span>
-                    </div>
-                    <div class="timeline-inst">University of California, Davis</div>
-                    <div class="timeline-loc">
-						<a href="https://globalstudy.ucdavis.edu/" target="_blank";">Global Study Program</a>
-		    		</div>
-                </div>
-            </div>
+<div class="cv-group">
+<h4>Tools</h4>
+<p class="tools">Python, R, Stata, ArcGIS Pro, and LaTeX.</p>
+</div>
+</section>
 
-            <!-- Awards -->
-            <div>
-                <h3 class="cv-section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                    Honors & Awards
-                </h3>
+<section id="contact">
+<h2>Contact</h2>
+<div class="prose">
+<p>Department of Economics, Rutgers University, New Brunswick.<br>
+<a href="mailto:yz2274@economics.rutgers.edu">yz2274@economics.rutgers.edu</a></p>
+</div>
+</section>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Academic Perfection</span>
-                        <span class="timeline-year">2025</span>
-                    </div>
-                    <div class="timeline-inst">University of California, Davis</div>
-                    <div class="timeline-loc">Awarded during <a href="https://globalstudy.ucdavis.edu/" target="_blank";">Global Study Program</a></div>
-                </div>
+</main>
 
-		<div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Honorable Mention</span>
-                        <span class="timeline-year">2024</span>
-                    </div>
-                    <div class="timeline-inst">
-			<a href="https://www.sppm.tsinghua.edu.cn/english/info/1057/1751.htm" target="_blank";">Tsinghua International Case Analysis Competition of Public Policy on SDGs</a>
-		    </div>
-                </div>
+<footer>
+<div class="wrap">
+<span>Yan Zhuang</span>
+<p>&copy; 2026 Yan Zhuang. All rights reserved.</p>
+</div>
+</footer>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Academic Excellence Scholarship</span>
-                        <span class="timeline-year">2023 & 2025</span>
-                    </div>
-                    <div class="timeline-inst">Renmin University of China</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Toolkit Section -->
-    <section id="skills" class="container">
-        <h2 class="section-title">Technical Toolkit</h2>
-        <div class="toolkit-grid">
-            <div class="tool-card">
-                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                <span class="tool-name">Python</span>
-            </div>
-            <div class="tool-card">
-                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                <span class="tool-name">R</span>
-            </div>
-            <div class="tool-card">
-                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                <span class="tool-name">Stata</span>
-            </div>
-            <div class="tool-card">
-                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span class="tool-name">ArcGIS Pro</span>
-            </div>
-            <div class="tool-card">
-                <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-                <span class="tool-name">LaTeX</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <div>
-                <p style="font-family: var(--font-serif); font-size: 1.125rem; color: #e2e8f0; margin-bottom: 0.5rem;">Yan Zhuang</p>
-                <p style="font-size: 0.875rem;">&copy; 2025 All rights reserved.</p>
-            </div>
-            <div class="footer-links">
-                <a href="mailto:yanzhuang2026@outlook.com">Email</a>
-                <a href="https://github.com/yanz-econ">GitHub</a>
-                <a href="#">Scholar</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
-        }
-
-        // Abstract Toggle
-        function toggleAbstract(button) {
-            const content = button.nextElementSibling;
-            content.classList.toggle('open');
-            
-            // Update button text
-            if (content.classList.contains('open')) {
-                button.innerHTML = 'Hide Abstract <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>';
-            } else {
-                button.innerHTML = 'Read Abstract <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
-            }
-        }
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobileMenu').classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>
